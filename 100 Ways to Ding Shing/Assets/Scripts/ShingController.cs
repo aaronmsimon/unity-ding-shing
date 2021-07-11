@@ -19,19 +19,18 @@ public class ShingController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(target.isVisible);
         if (target.isVisible)
         {
-            Vector2 moveDirection = (pointOfInterest.transform.position - transform.position).normalized;
-            velocity = moveDirection * speed;
+            Vector2 direction = (pointOfInterest.transform.position - transform.position).normalized;
+            velocity = new Vector2(direction.x, 0) * speed * Time.deltaTime;
         } else
         {
-            velocity = new Vector2(0, 0);
+            velocity = Vector2.zero;
         }
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(velocity.x, rb.velocity.y);
+        rb.MovePosition((Vector2)transform.position + velocity);
     }
 }
