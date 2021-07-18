@@ -9,7 +9,9 @@ public class ShingController : MonoBehaviour
 
     Rigidbody2D rb;
     SpriteRenderer target;
-    Vector2 velocity;
+
+    float velocityX;
+    float distanceThreshold = .5f;
 
     void Start()
     {
@@ -19,19 +21,20 @@ public class ShingController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(target.isVisible);
-        if (target.isVisible)
+        float distance = pointOfInterest.transform.position.x - transform.position.x;
+
+        if (target.isVisible && Mathf.Abs(distance) > distanceThreshold) // add on ground check so position of target doesn't affect the fall in the x
         {
-            Vector2 moveDirection = (pointOfInterest.transform.position - transform.position).normalized;
-            velocity = moveDirection * speed;
+            float direction = Mathf.Sign(distance);
+            velocityX = direction * speed;
         } else
         {
-            velocity = new Vector2(0, 0);
+            velocityX = 0;
         }
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(velocity.x, rb.velocity.y);
+        rb.velocity = new Vector2(velocityX, rb.velocity.y);
     }
 }
