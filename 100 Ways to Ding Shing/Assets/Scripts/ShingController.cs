@@ -28,20 +28,13 @@ public class ShingController : MonoBehaviour
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        Debug.Log(isGrounded);
         
         float distance = pointOfInterest.transform.position.x - transform.position.x;
 
         if (target.isVisible && Mathf.Abs(distance) > distanceThreshold)
         {
-            if (isGrounded)
-            {
-                float direction = Mathf.Sign(distance);
-                velocityX = direction * speed;
-            } else
-            {
-                velocityX = rb.velocity.x;
-            }
+            float direction = Mathf.Sign(distance);
+            velocityX = direction * speed;
         } else
         {
             velocityX = 0;
@@ -50,13 +43,17 @@ public class ShingController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(velocityX, rb.velocity.y);
+        if (isGrounded)
+        {
+            rb.velocity = new Vector2(velocityX, rb.velocity.y);
+        }
     }
 
     private void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
         {
+            Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
