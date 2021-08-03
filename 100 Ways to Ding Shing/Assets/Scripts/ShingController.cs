@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class ShingController : MonoBehaviour
 {
-    public float speed;
-    public GameObject pointOfInterest;
-    public LayerMask groundLayer;
+    [Header("General")]
+    [SerializeField] private float speed;
+    [SerializeField] private LayerMask groundLayer;
+    
+    [Header("Point of Interest")]
+    public bool includePointOfInterest;
+    [SerializeField] private GameObject pointOfInterest;
+    [SerializeField] private Transform returnPoint;
 
-    Rigidbody2D rb;
-    SpriteRenderer target;
-    Transform groundCheck;
+    private Rigidbody2D rb;
+    private SpriteRenderer target;
+    private Transform groundCheck;
 
-    float velocityX;
-    float distanceThreshold = .5f;
+    private float velocityX;
+    private float distanceThreshold = .5f;
 
-    bool isGrounded;
-    float groundCheckRadius = .2f;
+    private bool isGrounded;
+    private float groundCheckRadius = .2f;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponentInChildren<Rigidbody2D>();
         target = pointOfInterest.GetComponent<SpriteRenderer>();
         groundCheck = transform.Find("GroundCheck");
     }
 
-    void Update()
+    private void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         
@@ -41,7 +46,7 @@ public class ShingController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (isGrounded)
         {
