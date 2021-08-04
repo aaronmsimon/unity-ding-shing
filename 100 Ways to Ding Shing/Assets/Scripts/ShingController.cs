@@ -14,7 +14,7 @@ public class ShingController : MonoBehaviour
     [SerializeField] private Transform returnPoint;
 
     private Rigidbody2D rb;
-    private SpriteRenderer target;
+    private SpriteRenderer targetSprite;
     private Transform groundCheck;
 
     private float velocityX;
@@ -26,24 +26,20 @@ public class ShingController : MonoBehaviour
     private void Start()
     {
         rb = GetComponentInChildren<Rigidbody2D>();
-        target = pointOfInterest.GetComponent<SpriteRenderer>();
+        targetSprite = pointOfInterest.GetComponent<SpriteRenderer>();
         groundCheck = transform.Find("GroundCheck");
     }
 
     private void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        
-        float distance = pointOfInterest.transform.position.x - transform.position.x;
 
-        if (target.isVisible && Mathf.Abs(distance) > distanceThreshold)
-        {
-            float direction = Mathf.Sign(distance);
-            velocityX = direction * speed;
-        } else
-        {
-            velocityX = 0;
-        }
+        // visible is still in scene view (for shadows, etc) so potentially use this instead:  https://docs.unity3d.com/ScriptReference/GeometryUtility.TestPlanesAABB.html
+        float targetPosX = targetSprite.isVisible ? pointOfInterest.transform.position.x : returnPoint.transform.position.x;
+
+        float distance = targetPosX - transform.position.x;
+
+        velocityX = Mathf.Abs(distance) > distanceThreshold ? Mathf.Sign(distance) * speed : 0;
     }
 
     private void FixedUpdate()
