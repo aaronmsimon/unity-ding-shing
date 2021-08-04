@@ -13,6 +13,7 @@ public class ShingEditor : Editor
     private SerializedProperty pointOfInterest;
     private SerializedProperty returnPoint;
 
+
     private void OnEnable()
     {
         speed = serializedObject.FindProperty("speed");
@@ -31,11 +32,11 @@ public class ShingEditor : Editor
         EditorGUILayout.PropertyField(groundLayer);
 
         EditorGUILayout.PropertyField(includePointOfInterest);
-        serializedObject.ApplyModifiedProperties();
         if (includePointOfInterest.boolValue)
         {
             EditorGUILayout.PropertyField(pointOfInterest);
             EditorGUILayout.PropertyField(returnPoint);
         }
+        serializedObject.ApplyModifiedProperties();
     }
 }
