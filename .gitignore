@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 # Krita backup file
 *.kra~
+
+# TextMesh Pro throws off detected languages in GitHub since there are so many files
+TextMesh Pro/
