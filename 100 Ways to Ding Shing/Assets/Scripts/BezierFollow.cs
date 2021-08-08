@@ -11,9 +11,12 @@ public class BezierFollow : MonoBehaviour
     private Vector2 objPosition;
     private bool coroutineAllowed;
 
+    [SerializeField] private GameObject objectToFollowPath;
     public float speedModifier = 0.5f;
     public bool loop = true;
     public float wait = 2f;
+
+    public bool disableWhileWait;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,7 @@ public class BezierFollow : MonoBehaviour
 
     private IEnumerator GoByTheRoute(int routeNumber)
     {
+        objectToFollowPath.SetActive(true);
         coroutineAllowed = false;
 
         Vector2 p0 = routes[routeNumber].GetChild(0).position;
@@ -45,19 +49,18 @@ public class BezierFollow : MonoBehaviour
 
             objPosition = Mathf.Pow(1 - tParam, 3) * p0 + 3 * Mathf.Pow(1 - tParam, 2) * tParam * p1 + 3 * (1 - tParam) * Mathf.Pow(tParam, 2) * p2 + Mathf.Pow(tParam, 3) * p3;
 
-            transform.position = objPosition;
+            objectToFollowPath.transform.position = objPosition;
             yield return new WaitForEndOfFrame();
         }
 
         tParam = 0f;
 
-        routeToGo += 1;
-
-        if (routeToGo > routes.Length - 1)
-            routeToGo = 0;
+        routeToGo = routeToGo < routes.Length - 1 ? routeToGo++ : 0;
 
         if (loop)
         {
+            objectToFollowPath.SetActive(!disableWhileWait);
+
             yield return new WaitForSeconds(wait);
             coroutineAllowed = true;
         }
