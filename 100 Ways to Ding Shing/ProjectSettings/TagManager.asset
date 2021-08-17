@@ -42,3 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Shing
+    uniqueID: 76472255
+    locked: 0
