@@ -35,6 +35,10 @@ You will have different tools at your disposal to bring Shing to his untimely de
 * Mongol chase scene he blocks, you remove armor
 * Parachute, sky diving (maybe this one is less obvious)
 * Hot air balloon
+* Feed him bourbon and red meat to give him gout
+* Window washer
+* Electrocuted while trying to fix something (maybe you help turn on power)
+* Tamper with chandelier for him to be underneath
 
 ## Why this game was made
 More details to come! It's a personal story of pride, rage, and a score to settle with he who is known as "The Shing."
