@@ -16,6 +16,7 @@ public class ShingController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer targetSprite;
     private Transform groundCheck;
+    private Animator anim;
 
     private float velocityX;
     private float distanceThreshold = .5f;
@@ -23,11 +24,15 @@ public class ShingController : MonoBehaviour
     private bool isGrounded;
     private float groundCheckRadius = .2f;
 
+    private float lastPosX;
+
     private void Start()
     {
         rb = GetComponentInChildren<Rigidbody2D>();
         targetSprite = pointOfInterest.GetComponent<SpriteRenderer>();
         groundCheck = transform.Find("GroundCheck");
+        anim = GetComponentInChildren<Animator>();
+        lastPosX = transform.position.x;
     }
 
     private void Update()
@@ -40,6 +45,10 @@ public class ShingController : MonoBehaviour
         float distance = targetPosX - transform.position.x;
 
         velocityX = Mathf.Abs(distance) > distanceThreshold ? Mathf.Sign(distance) * speed : 0;
+
+        float traveledSinceLast = Mathf.Abs(lastPosX - transform.position.x);
+        anim.SetFloat("Speed", traveledSinceLast > 0.01 ? Mathf.Abs(velocityX) : 0);
+        lastPosX = transform.position.x;
     }
 
     private void FixedUpdate()
@@ -57,5 +66,10 @@ public class ShingController : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.tag);
     }
 }
