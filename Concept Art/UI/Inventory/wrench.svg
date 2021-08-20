@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg2771"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="wrench.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2773"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     showborder="false"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-intersection-paths="false"
+     inkscape:zoom="0.47118628"
+     inkscape:cx="262.10441"
+     inkscape:cy="457.35627"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="79"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2768" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path3384"
+       style="fill:none;stroke:#000000;stroke-width:1.31563;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 104.76727,84.400089 88.769025,98.331232 a 19.193193,19.193193 0 0 1 -1.424642,1.376243 19.193193,19.193193 0 0 1 -27.078695,-1.870219 19.193193,19.193193 0 0 1 1.870217,-27.078695 19.193193,19.193193 0 0 1 1.473342,-1.147983 L 79.681153,55.615294 A 39.029682,39.029682 0 0 0 40.928235,62.922791 39.029682,39.029682 0 0 0 28.368382,100.32955 l -65.314133,56.87502 a 39.029682,39.029682 0 0 0 -38.77827,7.29805 39.029682,39.029682 0 0 0 -12.577073,37.39092 l 15.998249,-13.93114 a 19.193193,19.193193 0 0 1 1.424641,-1.37624 19.193193,19.193193 0 0 1 27.078695,1.87022 19.193193,19.193193 0 0 1 -1.870218,27.07869 19.193193,19.193193 0 0 1 -1.47334,1.14799 l -16.071905,13.99528 a 39.029682,39.029682 0 0 0 38.752917,-7.3075 39.029682,39.029682 0 0 0 12.606481,-37.20685 l 65.459107,-57.00125 a 39.029682,39.029682 0 0 0 38.586668,-7.37173 39.029682,39.029682 0 0 0 12.577069,-37.390921 z" />
+  </g>
+</svg>
