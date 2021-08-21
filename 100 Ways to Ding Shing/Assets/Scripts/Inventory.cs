@@ -11,10 +11,4 @@ public class Inventory : MonoBehaviour
             Debug.Log(child.name + " has " + (child.childCount > 0 ? child.GetChild(0).name: "nothing" ));
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
