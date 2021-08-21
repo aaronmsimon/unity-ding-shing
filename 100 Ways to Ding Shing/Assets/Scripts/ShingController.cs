@@ -59,6 +59,20 @@ public class ShingController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        foreach (Transform child in collision.transform)
+        {
+            if (child.CompareTag("Collision Action"))
+            {
+                Debug.Log("Take picture");
+                // I think I can put a script on the collider that triggered this to broadcast a message
+                // then the camera would listen for that message and take a picture
+                // hopefully I can figure out how to get the camera connected to the broadcast via public variable
+            }
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
@@ -66,10 +80,5 @@ public class ShingController : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log(collision.gameObject.tag);
     }
 }
