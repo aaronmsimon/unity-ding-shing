@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class Camera : MonoBehaviour
+public class PhotoCamera : MonoBehaviour
 {
     [SerializeField] private GameObject flash;
     [SerializeField] private int flashCount;
