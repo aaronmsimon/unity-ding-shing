@@ -39,6 +39,11 @@ You will have different tools at your disposal to bring Shing to his untimely de
 * Window washer
 * Electrocuted while trying to fix something (maybe you help turn on power)
 * Tamper with chandelier for him to be underneath
+* Something with barnyard animals (hit by horse's back legs) (want more living entities for thanos snap)
+* Drown at public pool
+* Sarin gas attack (need to prevent him from getting to gas mask)
+* Hydraulic lift when working as mechanic
+* Injests wrong prescription
 
 ## Why this game was made
 More details to come! It's a personal story of pride, rage, and a score to settle with he who is known as "The Shing."
