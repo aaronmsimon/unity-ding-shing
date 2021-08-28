@@ -63,34 +63,28 @@ public class ShingController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        foreach (Transform child in collision.transform)
-        {
-            if (child.CompareTag("Collision Action"))
-            {
-                // Stop moving if Kinematic (move through if it's been tinkered with)
-                if (collision.gameObject.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Kinematic)
-                {
-                    hasCollided = true;
-                }
-                Debug.Log("Take picture");
-                // I think I can put a script on the collider that triggered this to broadcast a message
-                // then the camera would listen for that message and take a picture
-                // hopefully I can figure out how to get the camera connected to the broadcast via public variable
-            }
-        }
+        CollisionHandling(true, collision);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // this should be updated so it's DRY
+        CollisionHandling(false, collision);
+    }
+
+    private void CollisionHandling(bool collided, Collision2D collision)
+    {
         foreach (Transform child in collision.transform)
         {
             if (child.CompareTag("Collision Action"))
             {
-                // Start moving again if Kinematic
+                // Stop/Start moving if Kinematic (move through if it's been tinkered with)
                 if (collision.gameObject.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Kinematic)
                 {
-                    hasCollided = false;
+                    hasCollided = collided;
+                    Debug.Log("Take picture");
+                    // I think I can put a script on the collider that triggered this to broadcast a message
+                    // then the camera would listen for that message and take a picture
+                    // hopefully I can figure out how to get the camera connected to the broadcast via public variable
                 }
             }
         }
