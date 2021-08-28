@@ -24,7 +24,8 @@ public class ShingController : MonoBehaviour
     private bool isGrounded;
     private float groundCheckRadius = .2f;
 
-    private float lastPosX;
+    private bool isMoving;
+    private bool hasCollided;
 
     private void Start()
     {
@@ -32,7 +33,8 @@ public class ShingController : MonoBehaviour
         targetSprite = pointOfInterest.GetComponent<SpriteRenderer>();
         groundCheck = transform.Find("GroundCheck");
         anim = GetComponentInChildren<Animator>();
-        lastPosX = transform.position.x;
+        isMoving = false;
+        hasCollided = false;
     }
 
     private void Update()
@@ -45,10 +47,10 @@ public class ShingController : MonoBehaviour
         float distance = targetPosX - transform.position.x;
 
         velocityX = Mathf.Abs(distance) > distanceThreshold ? Mathf.Sign(distance) * speed : 0;
+        isMoving = velocityX != 0 && !hasCollided;
 
-        float traveledSinceLast = Mathf.Abs(lastPosX - transform.position.x);
-        anim.SetFloat("Speed", traveledSinceLast > 0.01 ? Mathf.Abs(velocityX) : 0);
-        lastPosX = transform.position.x;
+        anim.SetBool("isMoving", isMoving);
+
     }
 
     private void FixedUpdate()
@@ -65,10 +67,31 @@ public class ShingController : MonoBehaviour
         {
             if (child.CompareTag("Collision Action"))
             {
+                // Stop moving if Kinematic (move through if it's been tinkered with)
+                if (collision.gameObject.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Kinematic)
+                {
+                    hasCollided = true;
+                }
                 Debug.Log("Take picture");
                 // I think I can put a script on the collider that triggered this to broadcast a message
                 // then the camera would listen for that message and take a picture
                 // hopefully I can figure out how to get the camera connected to the broadcast via public variable
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // this should be updated so it's DRY
+        foreach (Transform child in collision.transform)
+        {
+            if (child.CompareTag("Collision Action"))
+            {
+                // Start moving again if Kinematic
+                if (collision.gameObject.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Kinematic)
+                {
+                    hasCollided = false;
+                }
             }
         }
     }
