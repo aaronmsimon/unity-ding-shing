@@ -29,7 +29,7 @@ public class ShingController : MonoBehaviour
 
     // Events
     public event System.Action OnDeath;
-    public event System.Action OnAction; // this means there can only be one action per scene or all listeners will get called at the same time - should there be more?
+    public event System.Action OnCollisionAction;
 
     private void Start()
     {
@@ -85,9 +85,9 @@ public class ShingController : MonoBehaviour
                 if (collision.gameObject.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Kinematic)
                 {
                     hasCollided = collided;
-                    if (collided && OnAction != null)
+                    if (collided && OnCollisionAction != null)
                     {
-                        OnAction();
+                        OnCollisionAction();
                     }
                 }
             }

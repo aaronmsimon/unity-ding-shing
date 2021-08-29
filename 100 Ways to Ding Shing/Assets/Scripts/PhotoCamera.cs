@@ -24,7 +24,7 @@ public class PhotoCamera : MonoBehaviour
 
     private void Start()
     {
-        shing.OnAction += TakePicture;
+        shing.OnCollisionAction += TakePicture;
     }
 
     private void TakePicture()
