@@ -7,7 +7,7 @@ public class ShingController : MonoBehaviour
     [Header("General")]
     [SerializeField] private float speed;
     [SerializeField] private LayerMask groundLayer;
-    
+
     [Header("Point of Interest")]
     public bool includePointOfInterest;
     [SerializeField] private GameObject pointOfInterest;
@@ -26,6 +26,10 @@ public class ShingController : MonoBehaviour
 
     private bool isMoving;
     private bool hasCollided;
+
+    // Events
+    public event System.Action OnDeath;
+    public event System.Action OnAction; // this means there can only be one action per scene or all listeners will get called at the same time - should there be more?
 
     private void Start()
     {
@@ -81,10 +85,10 @@ public class ShingController : MonoBehaviour
                 if (collision.gameObject.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Kinematic)
                 {
                     hasCollided = collided;
-                    Debug.Log("Take picture");
-                    // I think I can put a script on the collider that triggered this to broadcast a message
-                    // then the camera would listen for that message and take a picture
-                    // hopefully I can figure out how to get the camera connected to the broadcast via public variable
+                    if (collided && OnAction != null)
+                    {
+                        OnAction();
+                    }
                 }
             }
         }

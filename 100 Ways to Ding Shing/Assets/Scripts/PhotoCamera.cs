@@ -15,13 +15,23 @@ public class PhotoCamera : MonoBehaviour
     private float maxSeconds = .35f;
     private float nextFlashSeconds;
 
-    private void Update()
+    private ShingController shing;
+
+    private void Awake()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            flashes = 0;
-            StartCoroutine(cameraFlash());
-        }
+        shing = GameObject.FindGameObjectWithTag("Shing").transform.GetComponent<ShingController>();
+    }
+
+    private void Start()
+    {
+        shing.OnAction += TakePicture;
+    }
+
+    private void TakePicture()
+    {
+        flashes = 0;
+        StartCoroutine(cameraFlash());
+
     }
 
     private IEnumerator cameraFlash()
