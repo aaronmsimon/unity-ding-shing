@@ -389,6 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 397487810}
   - component: {fileID: 397487809}
+  - component: {fileID: 397487808}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Collision Action
@@ -396,6 +397,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &397487808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397487807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f390351b4dd0a41993da174f862ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fence: {fileID: 1934980704}
+  dirtKickup: {fileID: 1580333683}
 --- !u!61 &397487809
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1050,7 +1065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3088157951550392315, guid: 66b7110537bf50f4f88fc49f34277232, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3088157951550392315, guid: 66b7110537bf50f4f88fc49f34277232, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1058,7 +1073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3088157951550392315, guid: 66b7110537bf50f4f88fc49f34277232, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3088157951550392315, guid: 66b7110537bf50f4f88fc49f34277232, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1070,7 +1085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3088157951550392315, guid: 66b7110537bf50f4f88fc49f34277232, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 3088157951550392315, guid: 66b7110537bf50f4f88fc49f34277232, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1631,6 +1646,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fa96717df4cb2943928167d79493403, type: 3}
+--- !u!1 &1580333683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 326932758800023339, guid: 66b7110537bf50f4f88fc49f34277232, type: 3}
+  m_PrefabInstance: {fileID: 963081090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1651526502
 GameObject:
   m_ObjectHideFlags: 0
