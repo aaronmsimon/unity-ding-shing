@@ -8,6 +8,7 @@ public class FenceCollision : MonoBehaviour
     [SerializeField] private GameObject dirtKickup;
 
     private Rigidbody2D rbFence;
+    private float force = 5f;
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class FenceCollision : MonoBehaviour
     {
         if (collision.gameObject.name == "Shing" && rbFence.bodyType == RigidbodyType2D.Dynamic)
         {
+            rbFence.AddForce(Vector2.right * force, ForceMode2D.Impulse);
+
             dirtKickup.transform.parent = null;
             dirtKickup.GetComponent<ParticleSystem>().Play();
         }
