@@ -15,6 +15,7 @@ public class PhotoCamera : MonoBehaviour
     private float maxSeconds = .35f;
     private float nextFlashSeconds;
 
+    private AudioSource audioSource;
     private ShingController shing;
 
     private void Awake()
@@ -25,6 +26,7 @@ public class PhotoCamera : MonoBehaviour
     private void Start()
     {
         shing.OnCollisionAction += TakePicture;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void TakePicture()
@@ -40,6 +42,7 @@ public class PhotoCamera : MonoBehaviour
         {
             isFlashing = !isFlashing;
             flash.SetActive(isFlashing);
+            if (isFlashing) audioSource.Play();
             if (!isFlashing) flashes++;
 
             nextFlashSeconds = Random.Range(minSeconds, maxSeconds);
