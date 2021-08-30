@@ -7,9 +7,10 @@ public class ShingController : MonoBehaviour
     [Header("General")]
     [SerializeField] private float speed;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float fallDistThreshold;
 
     [Header("Point of Interest")]
-    public bool includePointOfInterest;
+    public bool includePOI;
     [SerializeField] private GameObject pointOfInterest;
     [SerializeField] private Transform returnPoint;
 
@@ -25,6 +26,7 @@ public class ShingController : MonoBehaviour
     private float groundCheckRadius = .2f;
 
     private bool isMoving;
+    private bool isFalling;
     private bool hasCollided;
 
     // Events
@@ -45,16 +47,17 @@ public class ShingController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
+        CheckIfFalling();
+
         // visible is still in scene view (for shadows, etc) so potentially use this instead:  https://docs.unity3d.com/ScriptReference/GeometryUtility.TestPlanesAABB.html
         float targetPosX = targetSprite.isVisible ? pointOfInterest.transform.position.x : returnPoint.transform.position.x;
-
         float distance = targetPosX - transform.position.x;
-
         velocityX = Mathf.Abs(distance) > distanceThreshold ? Mathf.Sign(distance) * speed : 0;
+
         isMoving = velocityX != 0 && !hasCollided;
 
-        anim.SetBool("isMoving", isMoving);
-
+        anim.SetBool("isFalling", isFalling);
+        anim.SetBool("isMoving", !isFalling ? isMoving : false);
     }
 
     private void FixedUpdate()
@@ -91,6 +94,19 @@ public class ShingController : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void CheckIfFalling()
+    {
+        RaycastHit2D ray = Physics2D.Raycast(groundCheck.position + Vector3.down * .1f, Vector2.down, 10f);
+        isFalling = ray.distance >= fallDistThreshold;
+
+        if (isFalling)
+        {
+            // want to have Shing drop anything he's holding - will come back to this (removed the rb on camera)
+            //transform.Find("Graphics").Find("Arm.R").DetachChildren();
+            //transform.Find("Graphics").Find("Arm.L").DetachChildren();
         }
     }
 
