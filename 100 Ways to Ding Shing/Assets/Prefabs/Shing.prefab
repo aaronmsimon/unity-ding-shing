@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725197351027625136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45, y: -0.26, z: 2}
+  m_LocalPosition: {x: -0.45, y: -0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1725197351183325069}
@@ -400,7 +400,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  includePointOfInterest: 1
+  fallDistThreshold: 0
+  includePOI: 0
   pointOfInterest: {fileID: 0}
   returnPoint: {fileID: 0}
 --- !u!1 &1725197351597730222
