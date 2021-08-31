@@ -56,6 +56,9 @@ public class ShingController : MonoBehaviour
 
         isMoving = velocityX != 0 && !hasCollided;
 
+        // Face move direction
+        transform.localScale = new Vector3(Mathf.Sign(velocityX), transform.localScale.y);
+
         anim.SetBool("isFalling", isFalling);
         anim.SetBool("isMoving", !isFalling ? isMoving : false);
     }
