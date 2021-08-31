@@ -32,6 +32,7 @@ public class ShingController : MonoBehaviour
     // Events
     public event System.Action OnDeath;
     public event System.Action OnCollisionAction;
+    public event System.Action OnFalling;
 
     private void Start()
     {
@@ -107,6 +108,8 @@ public class ShingController : MonoBehaviour
 
         if (isFalling)
         {
+            if (OnFalling != null)
+                OnFalling();
             // want to have Shing drop anything he's holding - will come back to this (removed the rb on camera)
             //transform.Find("Graphics").Find("Arm.R").DetachChildren();
             //transform.Find("Graphics").Find("Arm.L").DetachChildren();
