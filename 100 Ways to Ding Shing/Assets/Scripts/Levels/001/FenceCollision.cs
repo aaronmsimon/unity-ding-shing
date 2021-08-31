@@ -24,6 +24,7 @@ public class FenceCollision : MonoBehaviour
             rbFence.AddForce(Vector2.right * force, ForceMode2D.Impulse);
 
             dirtKickup.transform.parent = null;
+            dirtKickup.transform.localScale = Vector3.one;
             dirtKickup.GetComponent<ParticleSystem>().Play();
         }
     }
