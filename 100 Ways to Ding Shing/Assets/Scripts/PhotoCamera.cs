@@ -25,7 +25,6 @@ public class PhotoCamera : MonoBehaviour
 
     private float armRotation = 130;
     private float armRaiseTime = .5f;
-    private bool takingPicture;
 
     private void Awake()
     {
@@ -56,10 +55,7 @@ public class PhotoCamera : MonoBehaviour
 
         while (percent < 1)
         {
-            if (!takingPicture)
-            {
-                percent += Time.deltaTime * armSpeed;
-            }
+            percent += Time.deltaTime * armSpeed;
             float interpolation = 4 * (-Mathf.Pow(percent, 2) + percent);
             float armAngle = Mathf.Lerp(0, armRotation, interpolation);
             parentArm.transform.localEulerAngles = initialRotation + Vector3.forward * armAngle;
@@ -67,7 +63,6 @@ public class PhotoCamera : MonoBehaviour
 
             if (percent >= .5)
             {
-                takingPicture = true;
                 yield return StartCoroutine(cameraFlash());
             }
 
@@ -92,7 +87,5 @@ public class PhotoCamera : MonoBehaviour
             nextFlashSeconds = Random.Range(minSeconds, maxSeconds);
             yield return new WaitForSeconds(nextFlashSeconds);
         }
-
-        takingPicture = false;
     }
 }
