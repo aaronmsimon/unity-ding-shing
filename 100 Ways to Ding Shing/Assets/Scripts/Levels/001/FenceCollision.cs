@@ -9,18 +9,21 @@ public class FenceCollision : MonoBehaviour
 
     private ShingController shing;
     private Rigidbody2D rbFence;
+    private AudioSource audioSource;
 
     private float force = 5f;
 
     private void Start()
     {
         rbFence = fence.GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Shing" && rbFence.bodyType == RigidbodyType2D.Dynamic)
         {
+            audioSource.Play();
             rbFence.AddForce(Vector2.right * force, ForceMode2D.Impulse);
 
             dirtKickup.transform.parent = null;
