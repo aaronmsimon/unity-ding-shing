@@ -13,7 +13,7 @@ public class Tinker : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log(CursorController.activeCursorName);
+        Debug.Log(CursorController.activeItemName);
         rb.bodyType = RigidbodyType2D.Dynamic;
     }
 }

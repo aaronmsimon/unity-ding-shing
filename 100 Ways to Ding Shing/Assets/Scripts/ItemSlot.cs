@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
-    [SerializeField] private Texture2D cursor;
-    [SerializeField] private bool middleHotspot;
+    private Sprite item;
+
+    private void Start()
+    {
+        item = GetComponent<Image>().sprite;        
+    }
 
     public void ChangeCursor()
     {
-        CursorController.Instance.ChangeCursor(cursor, middleHotspot);
+        CursorController.Instance.ChangeCursor(item);
     }
 }
