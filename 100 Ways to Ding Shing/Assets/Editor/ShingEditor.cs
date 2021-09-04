@@ -14,6 +14,8 @@ public class ShingEditor : Editor
     private SerializedProperty pointOfInterest;
     private SerializedProperty returnPoint;
 
+    private SerializedProperty audioClips;
+
 
     private void OnEnable()
     {
@@ -25,6 +27,7 @@ public class ShingEditor : Editor
         pointOfInterest = serializedObject.FindProperty("pointOfInterest");
         returnPoint = serializedObject.FindProperty("returnPoint");
 
+        audioClips = serializedObject.FindProperty("audioClips");
     }
 
     public override void OnInspectorGUI()
@@ -40,6 +43,9 @@ public class ShingEditor : Editor
             EditorGUILayout.PropertyField(pointOfInterest);
             EditorGUILayout.PropertyField(returnPoint);
         }
+
+        EditorGUILayout.PropertyField(audioClips);
+
         serializedObject.ApplyModifiedProperties();
     }
 }

@@ -14,10 +14,14 @@ public class ShingController : MonoBehaviour
     [SerializeField] private GameObject pointOfInterest;
     [SerializeField] private Transform returnPoint;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip[] audioClips;
+
     private Rigidbody2D rb;
     private SpriteRenderer targetSprite;
     private Transform groundCheck;
     private Animator anim;
+    private AudioSource audioSource;
 
     private float velocityX;
     private float distanceThreshold = .5f;
@@ -39,6 +43,7 @@ public class ShingController : MonoBehaviour
         targetSprite = pointOfInterest.GetComponent<SpriteRenderer>();
         groundCheck = transform.Find("GroundCheck");
         anim = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
         isMoving = false;
         hasCollided = false;
     }
@@ -110,6 +115,8 @@ public class ShingController : MonoBehaviour
             // want to have Shing drop anything he's holding - will come back to this (removed the rb on camera)
             //transform.Find("Graphics").Find("Arm.R").DetachChildren();
             //transform.Find("Graphics").Find("Arm.L").DetachChildren();
+            audioSource.clip = audioClips[0];
+            audioSource.Play();
         }
     }
 
