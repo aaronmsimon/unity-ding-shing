@@ -5,10 +5,11 @@ using UnityEngine;
 public class CursorController : MonoBehaviour
 {
     public static CursorController Instance { get { return _instance; } }
-    public static string activeItemName;
+
+    public static SpriteRenderer spriteRenderer;
 
     private static CursorController _instance;
-    private static SpriteRenderer spriteRenderer;
+    private static Sprite defaultSprite;
 
     private void Awake()
     {
@@ -19,12 +20,25 @@ public class CursorController : MonoBehaviour
         {
             _instance = this;
             spriteRenderer = GetComponent<SpriteRenderer>();
+            defaultSprite = spriteRenderer.sprite;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ResetCursor();
         }
     }
 
     public void ChangeCursor(Sprite item)
     {
         spriteRenderer.sprite = item;
-        activeItemName = item.name;
+    }
+
+    private void ResetCursor()
+    {
+        spriteRenderer.sprite = defaultSprite;
     }
 }
