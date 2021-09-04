@@ -150,8 +150,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 76472255
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 2266279791374991027, guid: cfe423b5b83289442b61e6a3a410a0c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -404,6 +404,8 @@ MonoBehaviour:
   includePOI: 0
   pointOfInterest: {fileID: 0}
   returnPoint: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: b59374ed657776345ba30e09ebdc7c38, type: 3}
 --- !u!1 &1725197351597730222
 GameObject:
   m_ObjectHideFlags: 0
