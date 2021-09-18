@@ -44,6 +44,14 @@ You will have different tools at your disposal to bring Shing to his untimely de
 * Sarin gas attack (need to prevent him from getting to gas mask)
 * Hydraulic lift when working as mechanic
 * Injests wrong prescription
+* Squirrel crossing while on bike path (Laura Braatz)
+* Ice machine at restaurant falls (Jose Cobangbang)
+* Dentist office (Jose Cobangbang)
+* Log truck ala Final Destination (Vivian Simon)
+* 
+
+### Ideas for Mechanics
+* Slip on floor by squirting oil or something on it (Vivian Simon)
 
 ## Why this game was made
 More details to come! It's a personal story of pride, rage, and a score to settle with he who is known as "The Shing."
