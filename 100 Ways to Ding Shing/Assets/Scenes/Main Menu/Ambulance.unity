@@ -493,7 +493,7 @@ MonoBehaviour:
   shing: {fileID: 1627924980}
   shingTimeToTarget: 3.5
   ambulance: {fileID: 1607033464}
-  ambulanceTimeToTarget: 3.5
+  ambulanceWaitPercent: 0.9
 --- !u!4 &1813508184
 Transform:
   m_ObjectHideFlags: 0

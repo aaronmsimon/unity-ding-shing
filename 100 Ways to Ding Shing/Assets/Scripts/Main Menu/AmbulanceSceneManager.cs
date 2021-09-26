@@ -17,11 +17,12 @@ public class AmbulanceSceneManager : MonoBehaviour
 
     /* Ambulance */
     [SerializeField] private Transform ambulance;
-    [SerializeField] private float ambulanceTimeToTarget = 2;
+    [SerializeField] private float ambulanceWaitPercent = .5f;
 
     private Vector3 ambulanceStartPos;
     private Vector3 ambulanceTargetPos = new Vector3(1.67f, -0.23f);
     private SpriteRenderer ambulanceSprite;
+    private bool ambulanceStarted = false;
 
     private void Start()
     {
@@ -33,7 +34,6 @@ public class AmbulanceSceneManager : MonoBehaviour
         ambulanceSprite = ambulance.GetComponent<SpriteRenderer>();
         ambulanceStartPos = ambulance.position;
         ambulanceTargetPos = new Vector3(shingTargetPos.x + ambulanceSprite.size.x / 2, shingTargetPos.y - shingSprite.size.y / 2 + ambulanceSprite.size.y / 2, 0);
-        StartCoroutine(AmbulanceDrives());
     }
 
     private IEnumerator ShingRuns()
@@ -43,6 +43,12 @@ public class AmbulanceSceneManager : MonoBehaviour
 
         while (percent <= 1)
         {
+            if (percent >= ambulanceWaitPercent && !ambulanceStarted)
+            {
+                StartCoroutine(AmbulanceDrives(shingTimeToTarget * (1 - percent)));
+                ambulanceStarted = true;
+            }
+
             shing.position = Vector3.Lerp(shingStartPos, shingTargetPos, percent);
             shing.localScale = Vector3.Lerp(shingStartScale, shingEndScale, percent);
 
@@ -51,9 +57,9 @@ public class AmbulanceSceneManager : MonoBehaviour
         }
     }
 
-    private IEnumerator AmbulanceDrives()
+    private IEnumerator AmbulanceDrives(float timeToTarget)
     {
-        float moveSpeed = 1f / shingTimeToTarget;
+        float moveSpeed = 1f / timeToTarget;
         float percent = 0;
 
         while (percent <= 1)
