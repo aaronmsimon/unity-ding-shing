@@ -494,6 +494,10 @@ MonoBehaviour:
   shingTimeToTarget: 3.5
   ambulance: {fileID: 1607033464}
   ambulanceWaitPercent: 0.9
+  collisionRotateTime: 0.5
+  collisionFinalZRotation: 90
+  collisionFlyTime: 1
+  collisionDistance: -5
 --- !u!4 &1813508184
 Transform:
   m_ObjectHideFlags: 0
