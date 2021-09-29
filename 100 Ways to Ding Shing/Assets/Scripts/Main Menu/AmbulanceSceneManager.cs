@@ -78,7 +78,7 @@ public class AmbulanceSceneManager : MonoBehaviour
             percent += Time.deltaTime * moveSpeed;
             yield return null;
         }
-        StartCoroutine(ShingRotates());
+        //StartCoroutine(ShingRotates());
         StartCoroutine(ShingFlies());
     }
 
@@ -100,15 +100,17 @@ public class AmbulanceSceneManager : MonoBehaviour
 
     private IEnumerator ShingFlies()
     {
-        float rotateSpeed = 1f / collisionFlyTime;
+        float flySpeed = 1f / collisionFlyTime;
         float percent = 0;
         Vector3 initialPos = shing.position;
 
         while (percent <= 1)
         {
-            shing.position = Vector3.Lerp(initialPos, new Vector3(initialPos.x + collisionDistance, initialPos.y, initialPos.z), percent);
+            float interpolation = percent < .7f ? 1 - Mathf.Pow(1 - percent, 3) : percent * -4.5f + 4;
+            Debug.Log("percent: " + percent + " interpolation: " + interpolation);
+            shing.position = Vector3.Lerp(initialPos, new Vector3(initialPos.x + collisionDistance, initialPos.y, initialPos.z), interpolation);
 
-            percent += Time.deltaTime * rotateSpeed;
+            percent += Time.deltaTime * flySpeed;
             yield return null;
         }
     }
