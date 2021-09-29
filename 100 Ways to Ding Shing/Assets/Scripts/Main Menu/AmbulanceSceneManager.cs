@@ -5,6 +5,7 @@ using UnityEngine;
 public class AmbulanceSceneManager : MonoBehaviour
 {
     /* Shing */
+    [Header("Shing")]
     [SerializeField] private Transform shing;
     [SerializeField] private float shingTimeToTarget = 2;
 
@@ -16,6 +17,7 @@ public class AmbulanceSceneManager : MonoBehaviour
     private Vector3 shingEndScale = Vector3.one;
 
     /* Ambulance */
+    [Header("Ambulance")]
     [SerializeField] private Transform ambulance;
     [SerializeField] private float ambulanceWaitPercent = .5f;
 
@@ -23,6 +25,13 @@ public class AmbulanceSceneManager : MonoBehaviour
     private Vector3 ambulanceTargetPos = new Vector3(1.67f, -0.23f);
     private SpriteRenderer ambulanceSprite;
     private bool ambulanceStarted = false;
+
+    /* Collision */
+    [Header("Collision")]
+    [SerializeField] private float collisionRotateTime = 1;
+    [SerializeField] private float collisionFinalZRotation = 90;
+    [SerializeField] private float collisionFlyTime = 1;
+    [SerializeField] private float collisionDistance = -5;
 
     private void Start()
     {
@@ -67,6 +76,39 @@ public class AmbulanceSceneManager : MonoBehaviour
             ambulance.position = Vector3.Lerp(ambulanceStartPos, ambulanceTargetPos, percent);
 
             percent += Time.deltaTime * moveSpeed;
+            yield return null;
+        }
+        StartCoroutine(ShingRotates());
+        StartCoroutine(ShingFlies());
+    }
+
+    private IEnumerator ShingRotates()
+    {
+        float rotateSpeed = 1f / collisionRotateTime;
+        float percent = 0;
+        Vector3 initialRotation = shing.localEulerAngles;
+
+        while (percent <= 1)
+        {
+            float bodyAngle = Mathf.Lerp(0, collisionFinalZRotation, percent);
+            shing.localEulerAngles = initialRotation + Vector3.forward * bodyAngle;
+
+            percent += Time.deltaTime * rotateSpeed;
+            yield return null;
+        }
+    }
+
+    private IEnumerator ShingFlies()
+    {
+        float rotateSpeed = 1f / collisionFlyTime;
+        float percent = 0;
+        Vector3 initialPos = shing.position;
+
+        while (percent <= 1)
+        {
+            shing.position = Vector3.Lerp(initialPos, new Vector3(initialPos.x + collisionDistance, initialPos.y, initialPos.z), percent);
+
+            percent += Time.deltaTime * rotateSpeed;
             yield return null;
         }
     }
