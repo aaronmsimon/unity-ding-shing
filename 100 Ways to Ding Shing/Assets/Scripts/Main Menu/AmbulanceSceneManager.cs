@@ -10,7 +10,6 @@ public class AmbulanceSceneManager : MonoBehaviour
     [SerializeField] private float shingTimeToTarget = 2;
 
     private Vector3 shingStartPos;
-    private Vector3 shingTargetPos = new Vector3(1.67f, - 0.23f);
     private SpriteRenderer shingSprite;
 
     private Vector3 shingStartScale;
@@ -28,10 +27,12 @@ public class AmbulanceSceneManager : MonoBehaviour
 
     /* Collision */
     [Header("Collision")]
+    [SerializeField] private Transform collisionPos;
     [SerializeField] private float collisionRotateTime = 1;
     [SerializeField] private float collisionFinalZRotation = 90;
     [SerializeField] private float collisionFlyTime = 1;
-    [SerializeField] private float collisionDistance = -5;
+    [SerializeField] private Sprite deadShing;
+    [SerializeField] private Transform[] collisionPaths;
 
     private void Start()
     {
@@ -42,7 +43,8 @@ public class AmbulanceSceneManager : MonoBehaviour
 
         ambulanceSprite = ambulance.GetComponent<SpriteRenderer>();
         ambulanceStartPos = ambulance.position;
-        ambulanceTargetPos = new Vector3(shingTargetPos.x + ambulanceSprite.size.x / 2, shingTargetPos.y - shingSprite.size.y / 2 + ambulanceSprite.size.y / 2, 0);
+        float offset = 0;
+        ambulanceTargetPos = new Vector3(collisionPos.position.x + ambulanceSprite.size.x / 2 + offset, collisionPos.position.y - shingSprite.size.y / 2 + ambulanceSprite.size.y / 2);
     }
 
     private IEnumerator ShingRuns()
@@ -58,7 +60,7 @@ public class AmbulanceSceneManager : MonoBehaviour
                 ambulanceStarted = true;
             }
 
-            shing.position = Vector3.Lerp(shingStartPos, shingTargetPos, percent);
+            shing.position = Vector3.Lerp(shingStartPos, collisionPos.position, percent);
             shing.localScale = Vector3.Lerp(shingStartScale, shingEndScale, percent);
 
             percent += Time.deltaTime * moveSpeed;
@@ -80,8 +82,9 @@ public class AmbulanceSceneManager : MonoBehaviour
         }
 
         shing.GetComponent<Animator>().enabled = false;
+        shing.GetComponent<SpriteRenderer>().sprite = deadShing;
         StartCoroutine(ShingRotates());
-        StartCoroutine(ShingFlies());
+        StartCoroutine(ShingFollowPath());
     }
 
     private IEnumerator ShingRotates()
@@ -100,19 +103,20 @@ public class AmbulanceSceneManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ShingFlies()
+    private IEnumerator ShingFollowPath()
     {
         float flySpeed = 1f / collisionFlyTime;
-        float percent = 0;
-        Vector3 initialPos = shing.position;
 
-        while (percent <= 1)
+        for (int i = 0; i < collisionPaths.Length; i++)
         {
-            float posY = percent < .7f ? 1 - Mathf.Pow(1 - percent, 3) : percent * -4.5f + 4;
-            shing.position = new Vector3(percent * -6, posY);
-
-            percent += Time.deltaTime * flySpeed;
-            yield return null;
+            float percent = 0;
+            Vector3 startPos = shing.position;
+            while (percent <= 1)
+            {
+                percent += Time.deltaTime * flySpeed;
+                shing.position = Vector3.Lerp(startPos, collisionPaths[i].position, percent);
+                yield return null;
+            }
         }
     }
 }
