@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 4949321020405690084
     second: Shing_1
+  - first:
+      213: -768775844534516278
+    second: Shing_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -146,6 +149,27 @@ TextureImporter:
       bones: []
       spriteID: 4eea7a4de358fa440800000000000000
       internalID: 4949321020405690084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shing_2
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 250
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac58e9a4172c455f0800000000000000
+      internalID: -768775844534516278
       vertices: []
       indices: 
       edges: []
