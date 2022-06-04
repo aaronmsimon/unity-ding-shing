@@ -6,6 +6,9 @@ Unity version 2020.3.13f1 LTS
 ## Instructions
 You will have different tools at your disposal to bring Shing to his untimely demise.
 
+## Play on Itch!
+<https://cackenballz.itch.io/100-ways-to-ding-shing>
+
 ## Levels
 1. Grand Canyon Wildlife
 
