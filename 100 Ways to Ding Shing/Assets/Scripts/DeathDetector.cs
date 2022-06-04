@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeathDetector : MonoBehaviour
 {
     [SerializeField] private GameObject levelComplete;
+    [SerializeField] private PlayerController player;
 
     private AudioSource audioSource;
 
@@ -19,6 +20,7 @@ public class DeathDetector : MonoBehaviour
         {
             audioSource.Play();
             levelComplete.SetActive(true);
+            player.isAlive = false;
         }
     }
 }
