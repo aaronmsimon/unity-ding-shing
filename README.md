@@ -11,6 +11,7 @@ You will have different tools at your disposal to bring Shing to his untimely de
 
 ## Levels
 1. Grand Canyon Wildlife
+2. The Gout (in progress)
 
 ## Future ways to ding him
 * Get shot in a bank robbery
@@ -38,7 +39,7 @@ You will have different tools at your disposal to bring Shing to his untimely de
 * Mongol chase scene he blocks, you remove armor
 * Parachute, sky diving (maybe this one is less obvious)
 * Hot air balloon (Brian Cardella)
-* Feed him bourbon and red meat to give him gout
+~~* Feed him bourbon and red meat to give him gout~~
 * Window washer
 * Electrocuted while trying to fix something (maybe you help turn on power)
 * Tamper with chandelier for him to be underneath
