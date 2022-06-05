@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Fire1") && !isAlive)
         {
-            CursorController.Instance.ResetCursor();
+            Cursor.visible = true;
             StartCoroutine(GoToMainMenu());
         }
     }

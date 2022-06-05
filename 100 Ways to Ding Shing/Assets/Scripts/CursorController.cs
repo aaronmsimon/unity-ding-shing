@@ -37,7 +37,7 @@ public class CursorController : MonoBehaviour
         spriteRenderer.sprite = item;
     }
 
-    public void ResetCursor()
+    private void ResetCursor()
     {
         spriteRenderer.sprite = defaultSprite;
     }
