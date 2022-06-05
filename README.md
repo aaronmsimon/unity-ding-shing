@@ -37,7 +37,7 @@ You will have different tools at your disposal to bring Shing to his untimely de
 * Cement mixer dumped on
 * Mongol chase scene he blocks, you remove armor
 * Parachute, sky diving (maybe this one is less obvious)
-* Hot air balloon
+* Hot air balloon (Brian Cardella)
 * Feed him bourbon and red meat to give him gout
 * Window washer
 * Electrocuted while trying to fix something (maybe you help turn on power)
@@ -51,7 +51,14 @@ You will have different tools at your disposal to bring Shing to his untimely de
 * Ice machine at restaurant falls (Jose Cobangbang)
 * Dentist office (Jose Cobangbang)
 * Log truck ala Final Destination (Vivian Simon)
-* 
+* Coconut falling on head (Brian Cardella)
+* Auto erotic asphyxiation (Brian Cardella)
+* Red Wedding (Brian Cardella)
+* Rats under his hood that eat through the power steering fluid line (Brian Cardella)
+* 48 hour AOE gaming session (Brian Cardella)
+	* you keep cliking "sure one more game why not"
+	* the clock rotates and he grows a bears slowly and looks worse and worse and then DEAD
+	* during gaming session he keeps yelling at pwong
 
 ### Ideas for Mechanics
 * Slip on floor by squirting oil or something on it (Vivian Simon)
