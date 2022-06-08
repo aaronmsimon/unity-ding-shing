@@ -4,128 +4,77 @@ using UnityEngine;
 
 public class ShingController : MonoBehaviour
 {
-    [Header("General")]
+    public enum ShingBehavior { Idle, Meander, Target }
+
+    [Header("Behavior")]
     [SerializeField] private float speed;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float fallDistThreshold;
-
-    [Header("Point of Interest")]
-    public bool includePOI;
-    [SerializeField] private GameObject pointOfInterest;
-    [SerializeField] private Transform returnPoint;
-
-    [Header("Sound Effects")]
-    [SerializeField] private AudioClip[] audioClips;
+    [SerializeField] private ShingBehavior behavior;
+    [SerializeField] private float meanderTime;
+    [SerializeField] private Vector2 meanderXMinMax;
+    [SerializeField] private Transform moveToTarget;
 
     private Rigidbody2D rb;
-    private SpriteRenderer targetSprite;
     private Transform groundCheck;
     private Animator anim;
-    private AudioSource audioSource;
-
-    private float velocityX;
-    private float distanceThreshold = .5f;
 
     private bool isGrounded;
     private float groundCheckRadius = .2f;
 
+    private Vector3 target;
     private bool isMoving;
-    private bool isFalling;
-    private bool hasCollided;
 
     // Events
-    public event System.Action OnDeath;
     public event System.Action OnCollisionAction;
 
     private void Start()
     {
         rb = GetComponentInChildren<Rigidbody2D>();
-        targetSprite = pointOfInterest.GetComponent<SpriteRenderer>();
         groundCheck = transform.Find("GroundCheck");
         anim = GetComponentInChildren<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        isMoving = false;
-        hasCollided = false;
+
+        if (behavior == ShingBehavior.Meander)
+        {
+            StartCoroutine(Meander());
+        }
     }
 
     private void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        CheckIfFalling();
+        switch (behavior)
+        {
+            case ShingBehavior.Idle:
+                target = transform.position;
+                break;
 
-        // visible is still in scene view (for shadows, etc) so potentially use this instead:  https://docs.unity3d.com/ScriptReference/GeometryUtility.TestPlanesAABB.html
-        float targetPosX = targetSprite.isVisible ? pointOfInterest.transform.position.x : returnPoint.transform.position.x;
-        float distance = targetPosX - transform.position.x;
-        velocityX = Mathf.Abs(distance) > distanceThreshold ? Mathf.Sign(distance) * speed : 0;
+            case ShingBehavior.Meander:
+                break;
 
-        isMoving = velocityX != 0 && !hasCollided;
+            case ShingBehavior.Target:
+                target = moveToTarget.position;
+                break;
+        }
 
-        // Face move direction
-        transform.localScale = new Vector3(Mathf.Sign(velocityX), transform.localScale.y);
-
-        anim.SetBool("isFalling", isFalling);
-        anim.SetBool("isMoving", !isFalling ? isMoving : false);
+        anim.SetBool("isMoving", isMoving);
     }
 
     private void FixedUpdate()
     {
         if (isGrounded)
         {
-            rb.velocity = new Vector2(velocityX, rb.velocity.y);
+            rb.velocity = new Vector2((target - transform.position).normalized.x * speed, 0);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    IEnumerator Meander()
     {
-        CollisionHandling(true, collision);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        CollisionHandling(false, collision);
-    }
-
-    private void CollisionHandling(bool collided, Collision2D collision)
-    {
-        foreach (Transform child in collision.transform)
+        while (behavior == ShingBehavior.Meander)
         {
-            if (child.CompareTag("Collision Action"))
-            {
-                // Stop/Start moving if Kinematic (move through if it's been tinkered with)
-                if (collision.gameObject.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Kinematic)
-                {
-                    hasCollided = collided;
-                    if (collided && OnCollisionAction != null)
-                    {
-                        OnCollisionAction();
-                    }
-                }
-            }
-        }
-    }
-
-    private void CheckIfFalling()
-    {
-        RaycastHit2D ray = Physics2D.Raycast(groundCheck.position + Vector3.down * .1f, Vector2.down, 10f);
-        isFalling = ray.distance >= fallDistThreshold;
-
-        if (isFalling)
-        {
-            // want to have Shing drop anything he's holding - will come back to this (removed the rb on camera)
-            //transform.Find("Graphics").Find("Arm.R").DetachChildren();
-            //transform.Find("Graphics").Find("Arm.L").DetachChildren();
-            audioSource.clip = audioClips[0];
-            audioSource.Play();
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            yield return new WaitForSeconds(meanderTime);
+            target = new Vector3(Random.Range(meanderXMinMax.x, meanderXMinMax.y), transform.position.y);
+            Debug.Log(target);
         }
     }
 }
