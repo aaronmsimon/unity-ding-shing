@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
-    [SerializeField] private Camera viewCamera;
+    [SerializeField] private float renderDistance = 3;
 
     private bool isDragging;
-
-    private float cursorRenderDistance = 3;
 
     private void Awake()
     {
@@ -29,8 +27,8 @@ public class Drag : MonoBehaviour
     {
         if (isDragging)
         {
-            Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-            Plane backgroundPlane = new Plane(Vector3.back, Vector3.back * cursorRenderDistance);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Plane backgroundPlane = new Plane(Vector3.back, Vector3.forward * renderDistance);
             float rayDistance;
 
             if (backgroundPlane.Raycast(ray, out rayDistance))
